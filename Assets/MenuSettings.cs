@@ -9,7 +9,7 @@ public class MenuSettings : MonoBehaviour
 {
     public List<TextMeshProUGUI> text;
     public Slider textSlider;
-    private float sliderValue;
+    public float sliderValue;
     public List<float> defaultTextSize;
     public TextMeshProUGUI[] textToAdd;
 
@@ -53,16 +53,31 @@ public class MenuSettings : MonoBehaviour
     void Update()
     {
         textToAdd = FindObjectsOfType<TextMeshProUGUI>();
+
         for (int i = 0; i < textToAdd.Length; i++)
         {
             AddText(textToAdd[i]);
+            DontDestroyOnLoad(text[i]);
+            if (text[i] == null)
+            {
+                text.Remove(text[i]);
+            }
         }
 
         for (int i = 0; i < text.Count; i++)
         {
-            text[i].font = currentFont;
+            if (text[i].font != null)
+            {
+                text[i].font = currentFont;
+            }
         }
+
         sliderValue = textSlider.value;
+
+        for (int i = 0; i < text.Count; i++)
+        {
+            text[i].fontSize = defaultTextSize[i] * sliderValue;
+        }
     }
 
     //This is called when the slider value is changed
@@ -109,5 +124,11 @@ public class MenuSettings : MonoBehaviour
             playButton.SetActive(false);
             quitButton.SetActive(false);
         }
+    }
+
+    //This is called when play button is pressed
+    public void PlayButtonPressed()
+    {
+        SceneManager.LoadScene("Game");
     }
 }
