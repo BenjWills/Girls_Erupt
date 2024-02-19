@@ -7,10 +7,11 @@ using UnityEngine.SceneManagement;
 
 public class MenuSettings : MonoBehaviour
 {
-    public static List<TextMeshProUGUI> text;
+    public List<TextMeshProUGUI> text;
     public Slider textSlider;
     private float sliderValue;
-    public static List<float> defaultTextSize;
+    public List<float> defaultTextSize;
+    public TextMeshProUGUI[] textToAdd;
 
     public TMP_Dropdown dropdown;
     public TMP_FontAsset[] fontSelection;
@@ -51,6 +52,12 @@ public class MenuSettings : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        textToAdd = FindObjectsOfType<TextMeshProUGUI>();
+        for (int i = 0; i < textToAdd.Length; i++)
+        {
+            AddText(textToAdd[i]);
+        }
+
         for (int i = 0; i < text.Count; i++)
         {
             text[i].font = currentFont;
