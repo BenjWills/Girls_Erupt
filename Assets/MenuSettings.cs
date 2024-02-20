@@ -131,4 +131,11 @@ public class MenuSettings : MonoBehaviour
     {
         SceneManager.LoadScene("Game");
     }
+
+    //This is called when the quit button is pressed
+    public void QuitButtonPressed()
+    {
+        Debug.Break();
+        Application.Quit();
+    }
 }
