@@ -15,12 +15,13 @@ public class MenuSettings : MonoBehaviour
 
     public TMP_Dropdown dropdown;
     public TMP_FontAsset[] fontSelection;
-    public TMP_FontAsset currentFont;
+    public TMP_StyleSheet styleSheet;
+    public TMP_Style currentFont;
+    public string currentFontName;
 
     private bool settingsOpen;
     public GameObject[] settingsItems;
     public GameObject[] mainMenuItems;
-    public GameObject quitButton;
     public bool quitButtonActive;
 
     // Start is called before the first frame update
@@ -51,23 +52,6 @@ public class MenuSettings : MonoBehaviour
     {
         textToAdd = FindObjectsOfType<TextMeshProUGUI>();
 
-        DontDestroyOnLoad(quitButton);
-
-        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Game")) 
-        {
-            quitButton.SetActive(false);
-            if (Input.GetKeyDown(KeyCode.Escape) && quitButtonActive == false)
-            {
-                quitButton.SetActive(true);
-                quitButtonActive = true;
-            }
-            else if (Input.GetKeyDown(KeyCode.Escape) && quitButtonActive == true)
-            {
-                quitButton.SetActive(false );
-                quitButtonActive = false; 
-            }
-        }
-
         for (int i = 0; i < textToAdd.Length; i++)
         {
             AddText(textToAdd[i]);
@@ -78,7 +62,7 @@ public class MenuSettings : MonoBehaviour
         {
             if (text[i].font != null)
             {
-                text[i].font = currentFont;
+                text[i].fontStyle = currentFont;
             }
         }
 
@@ -104,8 +88,9 @@ public class MenuSettings : MonoBehaviour
     {
         for (int i = 0; i < text.Count; i++)
         {
-            text[i].font = fontSelection[dropdown.value];
-            currentFont = text[i].font;
+            currentFontName = dropdown.template.ToString();
+            currentFont = styleSheet.GetStyle(currentFontName);
+            
         }
     }
 

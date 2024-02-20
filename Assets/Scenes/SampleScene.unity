@@ -351,7 +351,7 @@ MonoBehaviour:
   m_fontColorGradientPreset: {fileID: 0}
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
-  m_StyleSheet: {fileID: 0}
+  m_StyleSheet: {fileID: 11400000, guid: 98c7be75520840c47a162105b6884899, type: 2}
   m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
@@ -560,7 +560,7 @@ MonoBehaviour:
   m_fontColorGradientPreset: {fileID: 0}
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
-  m_StyleSheet: {fileID: 0}
+  m_StyleSheet: {fileID: 11400000, guid: 98c7be75520840c47a162105b6884899, type: 2}
   m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
@@ -711,7 +711,7 @@ MonoBehaviour:
   m_fontColorGradientPreset: {fileID: 0}
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
-  m_StyleSheet: {fileID: 0}
+  m_StyleSheet: {fileID: 11400000, guid: 98c7be75520840c47a162105b6884899, type: 2}
   m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
@@ -753,7 +753,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 284.93848}
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -827,14 +827,17 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 12d78417f8061c54c8b0251774c1cc11, type: 2}
   - {fileID: 11400000, guid: ef4e3143ceec4fc4388f404b8fc0202a, type: 2}
   - {fileID: 11400000, guid: 41acece8a5bb27e4584b4c058d516200, type: 2}
-  currentFont: {fileID: 0}
-  settingsTitle: {fileID: 294026100}
-  slider: {fileID: 1262257198}
-  sliderTitle: {fileID: 391763495}
-  fontDropdown: {fileID: 758901452}
-  menuTitle: {fileID: 2112793700}
-  playButton: {fileID: 1530662180}
-  quitButton: {fileID: 1813476663}
+  currentFont: 0
+  settingsItems:
+  - {fileID: 391763495}
+  - {fileID: 294026100}
+  - {fileID: 758901452}
+  - {fileID: 1262257198}
+  mainMenuItems:
+  - {fileID: 2112793700}
+  - {fileID: 1530662180}
+  - {fileID: 1813476663}
+  quitButtonActive: 0
 --- !u!4 &322097712
 Transform:
   m_ObjectHideFlags: 0
@@ -928,7 +931,7 @@ MonoBehaviour:
   m_fontColorGradientPreset: {fileID: 0}
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
-  m_StyleSheet: {fileID: 0}
+  m_StyleSheet: {fileID: 11400000, guid: 98c7be75520840c47a162105b6884899, type: 2}
   m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
@@ -970,7 +973,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 8.8660755}
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1398,7 +1401,7 @@ MonoBehaviour:
   m_fontColorGradientPreset: {fileID: 0}
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
-  m_StyleSheet: {fileID: 0}
+  m_StyleSheet: {fileID: 11400000, guid: 98c7be75520840c47a162105b6884899, type: 2}
   m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
@@ -2494,7 +2497,7 @@ MonoBehaviour:
   m_fontColorGradientPreset: {fileID: 0}
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
-  m_StyleSheet: {fileID: 0}
+  m_StyleSheet: {fileID: 11400000, guid: 98c7be75520840c47a162105b6884899, type: 2}
   m_TextStyleHashCode: 0
   m_overrideHtmlColors: 0
   m_faceColor:
@@ -2840,7 +2843,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1813476666}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 322097711}
+        m_TargetAssemblyTypeName: MenuSettings, Assembly-CSharp
+        m_MethodName: QuitButtonPressed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1813476666
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3330,7 +3345,7 @@ MonoBehaviour:
   m_fontColorGradientPreset: {fileID: 0}
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
-  m_StyleSheet: {fileID: 0}
+  m_StyleSheet: {fileID: 11400000, guid: 98c7be75520840c47a162105b6884899, type: 2}
   m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
