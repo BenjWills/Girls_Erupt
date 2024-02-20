@@ -18,13 +18,10 @@ public class MenuSettings : MonoBehaviour
     public TMP_FontAsset currentFont;
 
     private bool settingsOpen;
-    public GameObject settingsTitle;
-    public GameObject slider;
-    public GameObject sliderTitle;
-    public GameObject fontDropdown;
-    public GameObject menuTitle;
-    public GameObject playButton;
+    public GameObject[] settingsItems;
+    public GameObject[] mainMenuItems;
     public GameObject quitButton;
+    public bool quitButtonActive;
 
     // Start is called before the first frame update
     void Start()
@@ -54,14 +51,27 @@ public class MenuSettings : MonoBehaviour
     {
         textToAdd = FindObjectsOfType<TextMeshProUGUI>();
 
+        DontDestroyOnLoad(quitButton);
+
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Game")) 
+        {
+            quitButton.SetActive(false);
+            if (Input.GetKeyDown(KeyCode.Escape) && quitButtonActive == false)
+            {
+                quitButton.SetActive(true);
+                quitButtonActive = true;
+            }
+            else if (Input.GetKeyDown(KeyCode.Escape) && quitButtonActive == true)
+            {
+                quitButton.SetActive(false );
+                quitButtonActive = false; 
+            }
+        }
+
         for (int i = 0; i < textToAdd.Length; i++)
         {
             AddText(textToAdd[i]);
             DontDestroyOnLoad(text[i]);
-            if (text[i] == null)
-            {
-                text.Remove(text[i]);
-            }
         }
 
         for (int i = 0; i < text.Count; i++)
@@ -106,23 +116,25 @@ public class MenuSettings : MonoBehaviour
 
         if (settingsOpen == false)
         {
-            settingsTitle.SetActive(false);
-            sliderTitle.SetActive(false);
-            slider.SetActive(false);
-            fontDropdown.SetActive(false);
-            menuTitle.SetActive(true);
-            playButton.SetActive(true);
-            quitButton.SetActive(true);
+            for (int i = 0; i < settingsItems.Length; i++)
+            {
+                settingsItems[i].SetActive(false);
+            }
+            for (int i = 0; i < mainMenuItems.Length; i++)
+            {
+                mainMenuItems[i].SetActive(true);
+            }
         }
         else
         {
-            settingsTitle.SetActive(true);
-            sliderTitle.SetActive(true);
-            slider.SetActive(true);
-            fontDropdown.SetActive(true);
-            menuTitle.SetActive(false);
-            playButton.SetActive(false);
-            quitButton.SetActive(false);
+            for (int i = 0; i < settingsItems.Length; i++)
+            {
+                settingsItems[i].SetActive(true);
+            }
+            for (int i = 0; i < mainMenuItems.Length; i++)
+            {
+                mainMenuItems[i].SetActive(false);
+            }
         }
     }
 
