@@ -7,7 +7,8 @@ using UnityEngine.SceneManagement;
 
 public class MenuSettings : MonoBehaviour
 {
-    public List<TextMeshProUGUI> text;
+    public TextMeshProUGUI[] text;
+    public List<TextMeshProUGUI> textList;
     public Slider textSlider;
     public float sliderValue;
     public List<float> defaultTextSize;
@@ -15,9 +16,8 @@ public class MenuSettings : MonoBehaviour
 
     public TMP_Dropdown dropdown;
     public TMP_FontAsset[] fontSelection;
-    public TMP_StyleSheet styleSheet;
-    public TMP_Style currentFont;
-    public string currentFontName;
+    public TMP_FontAsset currentFont;
+    public int currentFontNumb;
 
     private bool settingsOpen;
     public GameObject[] settingsItems;
@@ -37,60 +37,67 @@ public class MenuSettings : MonoBehaviour
         {
             DontDestroyOnLoad(this.gameObject);
         }
-    }
-    public void AddText(TextMeshProUGUI textNeeded)
-    {
-        if (!text.Contains(textNeeded))
+
+        for (int i = 0; i < text.Length; i++)
         {
-            text.Add(textNeeded);
-            defaultTextSize.Add(textNeeded.fontSize);
+            DontDestroyOnLoad(textList[i]);
+        }
+        text = Resources.FindObjectsOfTypeAll(typeof(TextMeshProUGUI)) as TextMeshProUGUI[];
+        textList.AddRange(text);
+    }
+    private void OnLevelWasLoaded(int level)
+    {
+        text = FindObjectsOfType<TextMeshProUGUI>();
+        for (int i = 0; i < text.Length; i++)
+        {
+            AddObjects(text[i]);
+        }
+    }
+
+    public void AddObjects(TextMeshProUGUI textNeeded)
+    {
+        if (!textList.Contains(textNeeded))
+        {
+            textList.Add(textNeeded);
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        textToAdd = FindObjectsOfType<TextMeshProUGUI>();
-
-        for (int i = 0; i < textToAdd.Length; i++)
+        for (int i = 0; i < text.Length; i++)
         {
-            AddText(textToAdd[i]);
-            DontDestroyOnLoad(text[i]);
-        }
-
-        for (int i = 0; i < text.Count; i++)
-        {
-            if (text[i].font != null)
+            if (defaultTextSize.Count != text.Length)
             {
-                text[i].fontStyle = currentFont;
+                defaultTextSize.Add(text[i].fontSize);
             }
         }
 
         sliderValue = textSlider.value;
 
-        for (int i = 0; i < text.Count; i++)
+        for (int i = 0; i < textList.Count; i++)
         {
-            text[i].fontSize = defaultTextSize[i] * sliderValue;
+            textList[i].fontSize = defaultTextSize[i] * sliderValue;
+            textList[i].font = currentFont;
         }
     }
 
     //This is called when the slider value is changed
     public void TextSliderSize()
     {
-        for (int i = 0; i < text.Count; i++)
+        for (int i = 0; i < textList.Count; i++)
         {
-            text[i].fontSize = defaultTextSize[i] * sliderValue;
+            textList[i].fontSize = defaultTextSize[i] * sliderValue;
         }
     }
 
     //This is called when the dropdown is changed
     public void FontStyleDropdown()
     {
-        for (int i = 0; i < text.Count; i++)
+        for (int i = 0; i < textList.Count; i++)
         {
-            currentFontName = dropdown.template.ToString();
-            currentFont = styleSheet.GetStyle(currentFontName);
-            
+            currentFont = fontSelection[currentFontNumb];
+            currentFontNumb = dropdown.value; 
         }
     }
 
