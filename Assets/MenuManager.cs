@@ -16,15 +16,17 @@ public class MenuManager : MonoBehaviour
         _settingsCanvas.SetActive(false);
         _pauseCanvas.SetActive(false);
 
-        isPaused = false;
-
         if (InputManager.instance.MenuOpenCloseInput)
         {
-            Pause();
-        }
-        else
-        {
-            Unpause();
+            Debug.Log("Paused");
+            if (!isPaused)
+            {
+                Pause();
+            }
+            else
+            {
+                Unpause();
+            }
         }
     }
     private void Pause()
