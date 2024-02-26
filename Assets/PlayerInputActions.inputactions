@@ -1,14 +1,14 @@
 {
-    "name": "PlayerControls",
+    "name": "PlayerInputActions",
     "maps": [
         {
-            "name": "Player",
-            "id": "5d851b25-6b4f-4605-adb8-76c8afc7cf79",
+            "name": "Menu",
+            "id": "185aa32c-5d3a-46c3-91f6-c062485254c8",
             "actions": [
                 {
-                    "name": "MenuOpenClose",
+                    "name": "PauseUnpause",
                     "type": "Button",
-                    "id": "a1fb52f1-77c3-4035-b979-ee4e91c33f2f",
+                    "id": "86890661-ead3-4ba3-88a1-292a806a1cc1",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -18,23 +18,51 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "27c90edd-5e6c-4aa4-ac39-d9161f45c7d4",
+                    "id": "a3321360-818e-47c6-9972-d30d70512404",
                     "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
-                    "action": "MenuOpenClose",
+                    "action": "PauseUnpause",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "b03f073b-6954-40bf-899e-ae6eb55df332",
+                    "id": "b6846ccb-8b68-4ef7-880c-22b58343a1ec",
                     "path": "<Gamepad>/start",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "MenuOpenClose",
+                    "action": "PauseUnpause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Player",
+            "id": "9943dcaa-f638-4cea-9a36-1ef3d064639c",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "13f0a092-7876-4812-a107-06577e4222b1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "1a8a8937-8ea9-4ad8-9c12-f215ec7b1c0b",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
