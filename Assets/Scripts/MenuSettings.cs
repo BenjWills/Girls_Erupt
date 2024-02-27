@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Unity.VisualScripting;
 
 public class MenuSettings : MonoBehaviour
 {
@@ -20,8 +21,8 @@ public class MenuSettings : MonoBehaviour
     public int currentFontNumb;
 
     private bool settingsOpen;
-    public GameObject[] settingsItems;
-    public GameObject[] mainMenuItems;
+    [SerializeField] private GameObject settingsMenu;
+    private GameObject mainMenu;
     public bool quitButtonActive;
 
     // Start is called before the first frame update
@@ -37,6 +38,13 @@ public class MenuSettings : MonoBehaviour
         {
             DontDestroyOnLoad(this.gameObject);
         }
+
+        if (settingsOpen == true)
+        {
+            settingsMenu = GameObject.Find("SettingsCanvas");
+        }
+
+        mainMenu = GameObject.Find("MainCanvas");
 
         for (int i = 0; i < text.Length; i++)
         {
@@ -108,25 +116,13 @@ public class MenuSettings : MonoBehaviour
 
         if (settingsOpen == false)
         {
-            for (int i = 0; i < settingsItems.Length; i++)
-            {
-                settingsItems[i].SetActive(false);
-            }
-            for (int i = 0; i < mainMenuItems.Length; i++)
-            {
-                mainMenuItems[i].SetActive(true);
-            }
+            settingsMenu.SetActive(false);
+            mainMenu.SetActive(true);
         }
         else
         {
-            for (int i = 0; i < settingsItems.Length; i++)
-            {
-                settingsItems[i].SetActive(true);
-            }
-            for (int i = 0; i < mainMenuItems.Length; i++)
-            {
-                mainMenuItems[i].SetActive(false);
-            }
+            settingsMenu.SetActive(true);
+            mainMenu.SetActive(false);
         }
     }
 

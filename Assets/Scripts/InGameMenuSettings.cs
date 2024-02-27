@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class InGameMenuSettings : MonoBehaviour
 {
@@ -26,5 +27,10 @@ public class InGameMenuSettings : MonoBehaviour
     public void ResumeGame()
     {
         inputManagerScript.isPaused = false;
+    }
+
+    public void ToMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 }
