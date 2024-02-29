@@ -3270,6 +3270,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputManagerScript: {fileID: 524850920}
+  mainMenu: {fileID: 204275785}
   settingsMenu: {fileID: 1538277370}
   pauseMenu: {fileID: 837058057}
   settingsOpen: 0

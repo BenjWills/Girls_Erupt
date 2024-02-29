@@ -20,22 +20,19 @@ public class InputManagerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isPaused == true && iGMenuSettings.settingsOpen == false)
-        {
-            Time.timeScale = 0f;
-            mainMenu.SetActive(false);
-            pauseMenu.SetActive(true);
-        }
-        else if (isPaused == false && iGMenuSettings.settingsOpen == false)
-        {
-            Time.timeScale = 1f;
-            mainMenu.SetActive(true);
-            pauseMenu.SetActive(false);
-        }
+
     }
 
     public void PauseUnpause(InputAction.CallbackContext context)
     {
         isPaused = !isPaused;
+        if (isPaused == true)
+        {
+            iGMenuSettings.PauseGame();
+        }
+        else
+        {
+            iGMenuSettings.ResumeGame();
+        }
     }
 }

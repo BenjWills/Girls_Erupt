@@ -45,7 +45,7 @@
             "id": "9943dcaa-f638-4cea-9a36-1ef3d064639c",
             "actions": [
                 {
-                    "name": "New action",
+                    "name": "Movement",
                     "type": "Button",
                     "id": "13f0a092-7876-4812-a107-06577e4222b1",
                     "expectedControlType": "Button",
@@ -58,11 +58,22 @@
                 {
                     "name": "",
                     "id": "1a8a8937-8ea9-4ad8-9c12-f215ec7b1c0b",
-                    "path": "",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "de2715c6-40b1-443c-82bf-6e943f5d34e0",
+                    "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "New action",
+                    "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
