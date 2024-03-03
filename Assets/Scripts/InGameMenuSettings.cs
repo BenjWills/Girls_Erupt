@@ -10,6 +10,7 @@ public class InGameMenuSettings : MonoBehaviour
     public GameObject settingsMenu;
     public GameObject pauseMenu;
     public bool settingsOpen;
+    public bool isPaused = false;
 
     public void OpenSettingsMenu()
     {
@@ -33,7 +34,7 @@ public class InGameMenuSettings : MonoBehaviour
         mainMenu.SetActive(true);
         pauseMenu.SetActive(false);
         settingsMenu.SetActive(false);
-        inputManagerScript.isPaused = false;
+        isPaused = false;
     }
 
     public void PauseGame()
@@ -42,7 +43,7 @@ public class InGameMenuSettings : MonoBehaviour
         mainMenu.SetActive(false);
         pauseMenu.SetActive(true);
         settingsMenu.SetActive(false);
-        inputManagerScript.isPaused = true;
+        isPaused = true;
     }
 
     public void ToMainMenu()
