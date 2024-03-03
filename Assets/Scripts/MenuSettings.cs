@@ -53,14 +53,6 @@ public class MenuSettings : MonoBehaviour
         text = Resources.FindObjectsOfTypeAll(typeof(TextMeshProUGUI)) as TextMeshProUGUI[];
         textList.AddRange(text);
     }
-    private void OnLevelWasLoaded(int level)
-    {
-        text = FindObjectsOfType<TextMeshProUGUI>();
-        for (int i = 0; i < text.Length; i++)
-        {
-            AddObjects(text[i]);
-        }
-    }
 
     public void AddObjects(TextMeshProUGUI textNeeded)
     {
@@ -73,6 +65,12 @@ public class MenuSettings : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        text = FindObjectsOfType<TextMeshProUGUI>();
+        for (int i = 0; i < text.Length; i++)
+        {
+            AddObjects(text[i]);
+        }
+
         for (int i = 0; i < text.Length; i++)
         {
             if (defaultTextSize.Count != text.Length)
