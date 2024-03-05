@@ -19,6 +19,10 @@ public class InputManagerScript : MonoBehaviour
     public float mouseSensitivity;
     private Vector2 mouseLook;
     private float xRotation;
+    private float yRotation;
+    float mouseX;
+    float mouseY;
+    private InputAction look;
 
     private void Awake()
     {
@@ -29,11 +33,6 @@ public class InputManagerScript : MonoBehaviour
     void Start()
     {
         inputActions = new Team1Game();
-        Cursor.lockState = CursorLockMode.Locked;
-    }
-    private void OnEnable()
-    {
-        inputActions.Enable();
 
         menu = inputActions.UI.PauseUnpause;
         menu.Enable();
@@ -44,28 +43,21 @@ public class InputManagerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Movement();
-        Look();
+
     }
 
-    public void Movement()
+    void OnLook(InputValue value)
     {
-        Vector3 playerVelocity = new Vector3(moveInput.x * movementSpeed, rb.velocity.y, moveInput.y * movementSpeed);
-        rb.velocity = transform.TransformDirection(playerVelocity);
-    }
+        mouseLook = value.Get<Vector2>();
 
-    public void Look()
-    {
-        mouseLook = inputActions.Player.Look.ReadValue<Vector2>();
+        mouseX = mouseLook.x * mouseSensitivity * Time.deltaTime;
+        mouseY = mouseLook.y * mouseSensitivity * Time.deltaTime;
 
-        float mouseX = mouseLook.x * mouseSensitivity * Time.deltaTime;
-        float mouseY = mouseLook.y * mouseSensitivity * Time.deltaTime;
+        yRotation -= mouseY;
+        yRotation = Mathf.Clamp(yRotation, -80f, 80);
+        xRotation += mouseX;
 
-        xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, -90f, 90);
-
-        transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
-        playerBody.Rotate(Vector3.up * mouseX);
+        transform.localRotation = Quaternion.Euler(0, xRotation, 0) * Quaternion.Euler(yRotation, 0, 0);
     }
 
     void OnPause(InputAction.CallbackContext context)
@@ -84,5 +76,8 @@ public class InputManagerScript : MonoBehaviour
     void OnMove(InputValue value)
     {
         moveInput = value.Get<Vector2>();
+
+        Vector3 playerVelocity = new Vector3(moveInput.x * movementSpeed, rb.velocity.y, moveInput.y * movementSpeed);
+        rb.velocity = transform.TransformDirection(playerVelocity);
     }
 }

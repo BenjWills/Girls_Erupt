@@ -14,6 +14,18 @@ public class InGameMenuSettings : MonoBehaviour
     public bool settingsOpen;
     public bool isPaused = false;
 
+
+    private void Update()
+    {
+        if (isPaused == false)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
+    }
     public void OpenSettingsMenu()
     {
         mainMenu.SetActive(false);
