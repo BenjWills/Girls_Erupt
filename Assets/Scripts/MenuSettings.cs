@@ -61,7 +61,7 @@ public class MenuSettings : MonoBehaviour
 
     private void OnLevelWasLoaded(int level)
     {
-        text = FindObjectsOfType<TextMeshProUGUI>();
+        text = Resources.FindObjectsOfTypeAll<TextMeshProUGUI>();
     }
 
     // Update is called once per frame
