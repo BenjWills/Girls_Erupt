@@ -830,7 +830,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 41acece8a5bb27e4584b4c058d516200, type: 2}
   currentFont: {fileID: 0}
   currentFontNumb: 0
-  settingsMenu: {fileID: 511602494}
   quitButtonActive: 0
 --- !u!4 &322097712
 Transform:
@@ -1258,6 +1257,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 666214984}
+  - component: {fileID: 666214985}
   m_Layer: 0
   m_Name: Menus
   m_TagString: Untagged
@@ -1283,6 +1283,19 @@ Transform:
   - {fileID: 1165285778}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &666214985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 666214983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 773149313aede9d4aa8a4605e923da19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  settingsMenu: {fileID: 511602494}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -1481,8 +1494,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 322097711}
-        m_TargetAssemblyTypeName: MenuSettings, Assembly-CSharp
+      - m_Target: {fileID: 666214985}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
         m_MethodName: FontStyleDropdown
         m_Mode: 1
         m_Arguments:
@@ -1812,7 +1825,7 @@ GameObject:
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
   m_Layer: 0
-  m_Name: Main Camera
+  m_Name: MainMenuCamera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2357,8 +2370,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 322097711}
-        m_TargetAssemblyTypeName: MenuSettings, Assembly-CSharp
+      - m_Target: {fileID: 666214985}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
         m_MethodName: TextSliderSize
         m_Mode: 1
         m_Arguments:
@@ -2775,8 +2788,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 322097711}
-        m_TargetAssemblyTypeName: MenuSettings, Assembly-CSharp
+      - m_Target: {fileID: 666214985}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
         m_MethodName: PlayButtonPressed
         m_Mode: 1
         m_Arguments:
@@ -2983,8 +2996,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 322097711}
-        m_TargetAssemblyTypeName: MenuSettings, Assembly-CSharp
+      - m_Target: {fileID: 666214985}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
         m_MethodName: QuitButtonPressed
         m_Mode: 1
         m_Arguments:
@@ -3431,8 +3444,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 322097711}
-        m_TargetAssemblyTypeName: MenuSettings, Assembly-CSharp
+      - m_Target: {fileID: 666214985}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
         m_MethodName: SettingsButtonPressed
         m_Mode: 1
         m_Arguments:

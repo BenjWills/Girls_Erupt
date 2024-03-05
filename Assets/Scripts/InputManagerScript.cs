@@ -11,22 +11,30 @@ public class InputManagerScript : MonoBehaviour
     public InGameMenuSettings iGMenuSettings;
     private Vector2 moveInput;
     public Rigidbody rb;
-     [SerializeField] float movementSpeed = 10f;
+    public Transform playerBody;
+    [SerializeField] float movementSpeed = 10f;
     private Team1Game inputActions;
     private InputAction menu;
 
+    public float mouseSensitivity;
+    private Vector2 mouseLook;
+    private float xRotation;
+
     private void Awake()
     {
-        inputActions = new Team1Game();
+
     }
 
     // Start is called before the first frame update
     void Start()
     {
-
+        inputActions = new Team1Game();
+        Cursor.lockState = CursorLockMode.Locked;
     }
     private void OnEnable()
     {
+        inputActions.Enable();
+
         menu = inputActions.UI.PauseUnpause;
         menu.Enable();
 
@@ -37,12 +45,27 @@ public class InputManagerScript : MonoBehaviour
     void Update()
     {
         Movement();
+        Look();
     }
 
     public void Movement()
     {
         Vector3 playerVelocity = new Vector3(moveInput.x * movementSpeed, rb.velocity.y, moveInput.y * movementSpeed);
         rb.velocity = transform.TransformDirection(playerVelocity);
+    }
+
+    public void Look()
+    {
+        mouseLook = inputActions.Player.Look.ReadValue<Vector2>();
+
+        float mouseX = mouseLook.x * mouseSensitivity * Time.deltaTime;
+        float mouseY = mouseLook.y * mouseSensitivity * Time.deltaTime;
+
+        xRotation -= mouseY;
+        xRotation = Mathf.Clamp(xRotation, -90f, 90);
+
+        transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
+        playerBody.Rotate(Vector3.up * mouseX);
     }
 
     void OnPause(InputAction.CallbackContext context)

@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class InGameMenuSettings : MonoBehaviour
 {
     public InputManagerScript inputManagerScript;
+    private MenuSettings menuSettingsScript;
     public GameObject mainMenu;
     public GameObject settingsMenu;
     public GameObject pauseMenu;
@@ -18,6 +20,7 @@ public class InGameMenuSettings : MonoBehaviour
         pauseMenu.SetActive(false);
         settingsMenu.SetActive(true);
         settingsOpen = true;
+        menuSettingsScript.text = FindObjectsOfType<TextMeshProUGUI>();
     }
 
     public void CloseSettingsMenu()
@@ -44,6 +47,7 @@ public class InGameMenuSettings : MonoBehaviour
         pauseMenu.SetActive(true);
         settingsMenu.SetActive(false);
         isPaused = true;
+        menuSettingsScript.text = FindObjectsOfType<TextMeshProUGUI>();
     }
 
     public void ToMainMenu()

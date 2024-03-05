@@ -4,7 +4,6 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using Unity.VisualScripting;
 
 public class MenuSettings : MonoBehaviour
 {
@@ -20,15 +19,20 @@ public class MenuSettings : MonoBehaviour
     public TMP_FontAsset currentFont;
     public int currentFontNumb;
 
-    private bool settingsOpen;
-    [SerializeField] private GameObject settingsMenu;
-    private GameObject mainMenu;
     public bool quitButtonActive;
 
     // Start is called before the first frame update
     void Start()
     {
-        settingsOpen = false;
+        Scene currentScene = SceneManager.GetActiveScene();
+
+        string sceneName = currentScene.name;
+
+        if (sceneName == "MainMenu")
+        {
+            Time.timeScale = 1;
+        }
+
         MenuSettings menuSettings = FindFirstObjectByType<MenuSettings>();
         if (menuSettings != this)
         {
@@ -38,13 +42,6 @@ public class MenuSettings : MonoBehaviour
         {
             DontDestroyOnLoad(this.gameObject);
         }
-
-        if (settingsOpen == true)
-        {
-            settingsMenu = GameObject.Find("SettingsCanvas");
-        }
-
-        mainMenu = GameObject.Find("MainCanvas");
 
         for (int i = 0; i < text.Length; i++)
         {
@@ -62,10 +59,28 @@ public class MenuSettings : MonoBehaviour
         }
     }
 
+    private void OnLevelWasLoaded(int level)
+    {
+        text = FindObjectsOfType<TextMeshProUGUI>();
+    }
+
     // Update is called once per frame
     void Update()
     {
-        text = FindObjectsOfType<TextMeshProUGUI>();
+        if (textSlider == null)
+        {
+            Slider[] sliderArray = Resources.FindObjectsOfTypeAll<Slider>();
+            textSlider = sliderArray[0];
+        }
+
+        if (dropdown == null)
+        {
+            TMP_Dropdown[] dropdownArray = Resources.FindObjectsOfTypeAll<TMP_Dropdown>();
+            dropdown = dropdownArray[0];
+        }
+
+        sliderValue = textSlider.value;
+
         for (int i = 0; i < text.Length; i++)
         {
             AddObjects(text[i]);
@@ -79,61 +94,10 @@ public class MenuSettings : MonoBehaviour
             }
         }
 
-        sliderValue = textSlider.value;
-
         for (int i = 0; i < textList.Count; i++)
         {
             textList[i].fontSize = defaultTextSize[i] * sliderValue;
             textList[i].font = currentFont;
         }
-    }
-
-    //This is called when the slider value is changed
-    public void TextSliderSize()
-    {
-        for (int i = 0; i < textList.Count; i++)
-        {
-            textList[i].fontSize = defaultTextSize[i] * sliderValue;
-        }
-    }
-
-    //This is called when the dropdown is changed
-    public void FontStyleDropdown()
-    {
-        for (int i = 0; i < textList.Count; i++)
-        {
-            currentFont = fontSelection[currentFontNumb];
-            currentFontNumb = dropdown.value; 
-        }
-    }
-
-    //This is called when the settings button is pressed
-    public void SettingsButtonPressed()
-    {
-        settingsOpen = !settingsOpen;
-
-        if (settingsOpen == false)
-        {
-            settingsMenu.SetActive(false);
-            mainMenu.SetActive(true);
-        }
-        else
-        {
-            settingsMenu.SetActive(true);
-            mainMenu.SetActive(false);
-        }
-    }
-
-    //This is called when play button is pressed
-    public void PlayButtonPressed()
-    {
-        SceneManager.LoadScene("Game");
-    }
-
-    //This is called when the quit button is pressed
-    public void QuitButtonPressed()
-    {
-        Debug.Break();
-        Application.Quit();
     }
 }
