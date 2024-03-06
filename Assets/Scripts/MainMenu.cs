@@ -5,9 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    private GameObject mainMenu;
     private bool settingsOpen;
-    [SerializeField] private GameObject settingsMenu;
+    public GameObject settingsMenu;
+    public GameObject mainMenu;
     private MenuSettings menuSettingsScript;
 
     private void Start()
@@ -18,7 +18,6 @@ public class MainMenu : MonoBehaviour
         {
             settingsMenu = GameObject.Find("SettingsCanvas");
         }
-        mainMenu = GameObject.Find("MainCanvas");
         menuSettingsScript = GameObject.Find("DontDestroy").GetComponent<MenuSettings>();
     }
 
@@ -37,21 +36,19 @@ public class MainMenu : MonoBehaviour
         for (int i = 0; i < menuSettingsScript.textList.Count; i++)
         {
             menuSettingsScript.currentFont = menuSettingsScript.fontSelection[menuSettingsScript.currentFontNumb];
-            menuSettingsScript.currentFontNumb = menuSettingsScript.dropdown.value;
+            menuSettingsScript.currentFontNumb = menuSettingsScript.fontDropdown.value;
         }
     }
 
     //This is called when the settings button is pressed
     public void SettingsButtonPressed()
     {
-        settingsOpen = !settingsOpen;
-
-        if (settingsOpen == false)
+        if (settingsMenu.activeSelf)
         {
             settingsMenu.SetActive(false);
             mainMenu.SetActive(true);
         }
-        else
+        else if(mainMenu.activeSelf)
         {
             settingsMenu.SetActive(true);
             mainMenu.SetActive(false);

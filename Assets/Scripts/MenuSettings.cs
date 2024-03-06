@@ -13,8 +13,8 @@ public class MenuSettings : MonoBehaviour
     public float sliderValue;
     public List<float> defaultTextSize;
     public TextMeshProUGUI[] textToAdd;
-
-    public TMP_Dropdown dropdown;
+    public float sensitivityMultiplier = 1;
+    public TMP_Dropdown fontDropdown;
     public TMP_FontAsset[] fontSelection;
     public TMP_FontAsset currentFont;
     public int currentFontNumb;
@@ -49,6 +49,25 @@ public class MenuSettings : MonoBehaviour
         }
         text = Resources.FindObjectsOfTypeAll(typeof(TextMeshProUGUI)) as TextMeshProUGUI[];
         textList.AddRange(text);
+        AddFontsToList();
+    }
+
+    public void AddFontsToList()
+    {
+        List<string> fontOptions = new List<string>();
+        fontDropdown.ClearOptions();
+        foreach (TMP_FontAsset font in fontSelection)
+        {
+            string fontName = font.name;
+            fontOptions.Add(fontName);
+        }
+        fontDropdown.AddOptions(fontOptions);
+    }
+
+    public void SetSensitivity(float value)
+    {
+        sensitivityMultiplier = value;
+        //PlayerPrefs.SetFloat("SensitivityValue", sensitivityMultiplier);
     }
 
     public void AddObjects(TextMeshProUGUI textNeeded)
@@ -72,13 +91,6 @@ public class MenuSettings : MonoBehaviour
             Slider[] sliderArray = Resources.FindObjectsOfTypeAll<Slider>();
             textSlider = sliderArray[0];
         }
-
-        if (dropdown == null)
-        {
-            TMP_Dropdown[] dropdownArray = Resources.FindObjectsOfTypeAll<TMP_Dropdown>();
-            dropdown = dropdownArray[0];
-        }
-
         sliderValue = textSlider.value;
 
         for (int i = 0; i < text.Length; i++)

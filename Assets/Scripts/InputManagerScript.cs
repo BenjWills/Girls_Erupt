@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 public class InputManagerScript : MonoBehaviour
 {
+    MenuSettings settings;
     public GameObject mainMenu;
     public GameObject pauseMenu;
     public GameObject settingsMenu;
@@ -15,8 +16,6 @@ public class InputManagerScript : MonoBehaviour
     [SerializeField] float movementSpeed = 10f;
     private Team1Game inputActions;
     private InputAction menu;
-
-    public float mouseSensitivity;
     private Vector2 mouseLook;
     private float xRotation;
     private float yRotation;
@@ -26,7 +25,7 @@ public class InputManagerScript : MonoBehaviour
 
     private void Awake()
     {
-
+        settings = FindObjectOfType<MenuSettings>();
     }
 
     // Start is called before the first frame update
@@ -50,8 +49,8 @@ public class InputManagerScript : MonoBehaviour
     {
         mouseLook = value.Get<Vector2>();
 
-        mouseX = mouseLook.x * mouseSensitivity * Time.deltaTime;
-        mouseY = mouseLook.y * mouseSensitivity * Time.deltaTime;
+        mouseX = mouseLook.x * settings.sensitivityMultiplier * Time.deltaTime;
+        mouseY = mouseLook.y * settings.sensitivityMultiplier * Time.deltaTime;
 
         yRotation -= mouseY;
         yRotation = Mathf.Clamp(yRotation, -80f, 80);
