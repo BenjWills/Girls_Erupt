@@ -24,15 +24,6 @@ public class MenuSettings : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Scene currentScene = SceneManager.GetActiveScene();
-
-        string sceneName = currentScene.name;
-
-        if (sceneName == "MainMenu")
-        {
-            Time.timeScale = 1;
-        }
-
         MenuSettings menuSettings = FindFirstObjectByType<MenuSettings>();
         if (menuSettings != this)
         {
