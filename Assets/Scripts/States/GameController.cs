@@ -41,7 +41,6 @@ public class GameController : MonoBehaviour
     {
         SceneManager.LoadSceneAsync("Game", LoadSceneMode.Additive);
         DontDestroyOnLoad(this.gameObject);
-
     }
 
     // Start is called before the first frame update
