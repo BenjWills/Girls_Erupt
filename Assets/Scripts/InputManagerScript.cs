@@ -9,6 +9,7 @@ public class InputManagerScript : MonoBehaviour
     public GameObject pauseMenu;
     public GameObject settingsMenu;
     public InGameMenuSettings iGMenuSettings;
+
     private Vector2 moveInput;
     public Rigidbody rb;
     public Transform playerBody;
@@ -22,12 +23,6 @@ public class InputManagerScript : MonoBehaviour
     private float yRotation;
     float mouseX;
     float mouseY;
-    private InputAction look;
-
-    private void Awake()
-    {
-
-    }
 
     // Start is called before the first frame update
     void Start()
@@ -38,12 +33,6 @@ public class InputManagerScript : MonoBehaviour
         menu.Enable();
 
         menu.performed += OnPause;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     void OnLook(InputValue value)

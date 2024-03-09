@@ -3,7 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Main Menu Cam
+  - Game Cam
+  - Pause Menu
+  - Input Manager
+  - In Game Menu Settings
   layers:
   - Default
   - TransparentFX
