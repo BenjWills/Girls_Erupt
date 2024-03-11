@@ -8,13 +8,19 @@ public class GameState : BaseStates
 {
     public override void EnterState(GameController gc)
     {
-        gc.inputManagerScript.SetActive(true);
-        gc.iGMenuSettings.enabled = true;
+        Debug.Log("GS Entered");
+
+        gc.iGMenu.SetActive(true);
+        gc.mainMenu.SetActive(false);
+        gc.allCanvas.SetActive(false);
+
         foreach (CinemachineVirtualCamera camera in gc.cameras)
         {
             camera.Priority = 10;
         }
         gc.gameCam.Priority = 11;
+
+        gc.StartEnteringGameState();
     }
     public override void UpdateState(GameController gc)
     {

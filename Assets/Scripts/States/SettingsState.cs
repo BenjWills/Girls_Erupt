@@ -6,10 +6,7 @@ public class SettingsState : BaseStates
 {
     public override void EnterState(GameController gc)
     {
-        for (int i = 0; i < gc.text.Length; i++)
-        {
-            gc.text[i].fontSize = gc.defaultTextSize[i] * gc.textSliderValue;
-        }
+        Debug.Log("SS Entered");
     }
     public override void UpdateState(GameController gc)
     {

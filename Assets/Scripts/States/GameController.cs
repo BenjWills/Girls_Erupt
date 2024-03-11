@@ -10,7 +10,7 @@ public class GameController : MonoBehaviour
 {
     public TextMeshProUGUI[] text;
     public Slider textSlider;
-    public float[] defaultTextSize;
+    public List<float> defaultTextSize = new List<float>();
     public float textSliderValue;
 
     public TMP_Dropdown dropdown;
@@ -18,19 +18,26 @@ public class GameController : MonoBehaviour
     public TMP_FontAsset currentFont;
     public int currentFontNumb;
 
+    public GameObject allCanvas;
     public GameObject settingsMenu;
     public GameObject mainMenu;
-    public GameObject pauseMenu;
 
-    public GameObject inputManagerScript;
+    public GameObject iGMenu;
+    public Canvas pauseMenu;
+
+    public InputManagerScript inputManagerScript;
     public InGameMenuSettings iGMenuSettings;
 
-    public List<CinemachineVirtualCamera> cameras;
+    public List<CinemachineVirtualCamera> cameras = new List<CinemachineVirtualCamera>();
     public CinemachineVirtualCamera mainMenuCam;
     public CinemachineVirtualCamera gameCam;
 
     public bool isPlaying;
     public bool inSettings;
+
+    public Transform gameCamLookAt;
+
+    public GameObject player;
 
     public BaseStates currentState;
     public readonly MenuState ms = new MenuState();
@@ -43,35 +50,51 @@ public class GameController : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         mainMenuCam = GameObject.FindGameObjectWithTag("Main Menu Cam").GetComponent<CinemachineVirtualCamera>();
         gameCam = GameObject.FindGameObjectWithTag("Game Cam").GetComponent<CinemachineVirtualCamera>();
-        inputManagerScript = GameObject.FindGameObjectWithTag("Input Manager");
+        inputManagerScript = GameObject.Find("Player").GetComponent<InputManagerScript>();
         iGMenuSettings = GameObject.FindGameObjectWithTag("In Game Menu Settings").GetComponent<InGameMenuSettings>();
-        pauseMenu = GameObject.FindGameObjectWithTag("Pause Menu");
+        iGMenu = GameObject.FindGameObjectWithTag("In Game Menu");
+        player = GameObject.Find("Player");
+
+        Canvas[] menuObject = Resources.FindObjectsOfTypeAll<Canvas>();
+        TMP_Dropdown[] dropdownObject = Resources.FindObjectsOfTypeAll<TMP_Dropdown>();
+
+        for (int i = 0; i < menuObject.Length; i++)
+        {
+            if (menuObject[i].tag == "Pause Menu")
+            {
+                pauseMenu = menuObject[i];
+            }
+        }
+        for (int i = 0; i < dropdownObject.Length; i++)
+        {
+            if (dropdownObject[i].name == "Settings Font Dropdown")
+            {
+                dropdown = dropdownObject[i];
+            }
+        }
 
         text = Resources.FindObjectsOfTypeAll<TextMeshProUGUI>();
 
         cameras.Add(mainMenuCam);
         cameras.Add(gameCam);
 
-        textSliderValue = textSlider.value;
         for (int i = 0; i < text.Length; i++)
         {
-            defaultTextSize[i] = text[i].fontSize;
+            defaultTextSize.Add(text[i].fontSize);
         }
 
         isPlaying = false;
 
-        inputManagerScript.SetActive(false);
+        inputManagerScript.enabled = false;
         iGMenuSettings.enabled = false;
 
         TransitionToState(ms);
     }
 
-    // Update is called once per frame
     void Update()
     {
         currentState.UpdateState(this);
@@ -93,13 +116,41 @@ public class GameController : MonoBehaviour
         isPlaying = true;
     }
 
-    //This is called when the dropdown is changed
+    public void QuitGame()
+    {
+        Application.Quit();
+        Debug.Break();
+    }
+
+    public void TextSliderChange()
+    {
+        for (int i = 0; i < text.Length; i++)
+        {
+            textSliderValue = textSlider.value;
+            text[i].fontSize = defaultTextSize[i] * textSliderValue;
+        }
+    }
+
     public void FontStyleDropdown()
     {
         for (int i = 0; i < text.Length; i++)
         {
-            currentFont = fontSelection[currentFontNumb];
             currentFontNumb = dropdown.value;
+            currentFont = fontSelection[currentFontNumb];
+            text[i].font = currentFont;
         }
+    }
+
+    public void StartEnteringGameState()
+    {
+        StartCoroutine(EnteringGameState());
+    }
+
+    IEnumerator EnteringGameState()
+    {
+        player.transform.rotation = new Quaternion(0, 0, 0, 0);
+        yield return new WaitForSeconds(2);
+        inputManagerScript.enabled = true;
+        iGMenuSettings.enabled = true;
     }
 }

@@ -307,19 +307,28 @@ MonoBehaviour:
   defaultTextSize: []
   textSliderValue: 0
   dropdown: {fileID: 758901454}
-  fontSelection: []
+  fontSelection:
+  - {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  - {fileID: 11400000, guid: eedde33173c0a804f91abfa7082534ec, type: 2}
+  - {fileID: 11400000, guid: 12d78417f8061c54c8b0251774c1cc11, type: 2}
+  - {fileID: 11400000, guid: ef4e3143ceec4fc4388f404b8fc0202a, type: 2}
+  - {fileID: 11400000, guid: 41acece8a5bb27e4584b4c058d516200, type: 2}
   currentFont: {fileID: 0}
   currentFontNumb: 0
+  allCanvas: {fileID: 2119051384}
   settingsMenu: {fileID: 511602494}
   mainMenu: {fileID: 1165285773}
+  iGMenu: {fileID: 0}
   pauseMenu: {fileID: 0}
   inputManagerScript: {fileID: 0}
   iGMenuSettings: {fileID: 0}
   cameras: []
-  mainMenuCam: {fileID: 0}
+  mainMenuCam: {fileID: 612971064}
   gameCam: {fileID: 0}
   isPlaying: 0
   inSettings: 0
+  gameCamLookAt: {fileID: 0}
+  player: {fileID: 0}
 --- !u!4 &176220537
 Transform:
   m_ObjectHideFlags: 0
@@ -848,66 +857,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -13.189087}
   m_SizeDelta: {x: 800, y: 58.442}
   m_Pivot: {x: 0.5, y: 1}
---- !u!1 &322097710
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 322097712}
-  - component: {fileID: 322097711}
-  m_Layer: 0
-  m_Name: DontDestroy
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &322097711
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 322097710}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9ce3ddb537c86248bb1879bbb829be5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  text: []
-  textList: []
-  textSlider: {fileID: 1262257200}
-  sliderValue: 0
-  defaultTextSize: []
-  textToAdd: []
-  dropdown: {fileID: 758901454}
-  fontSelection:
-  - {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  - {fileID: 11400000, guid: eedde33173c0a804f91abfa7082534ec, type: 2}
-  - {fileID: 11400000, guid: 12d78417f8061c54c8b0251774c1cc11, type: 2}
-  - {fileID: 11400000, guid: ef4e3143ceec4fc4388f404b8fc0202a, type: 2}
-  - {fileID: 11400000, guid: 41acece8a5bb27e4584b4c058d516200, type: 2}
-  currentFont: {fileID: 0}
-  currentFontNumb: 0
-  quitButtonActive: 0
---- !u!4 &322097712
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 322097710}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 552.1065, y: 243.82892, z: -138.84625}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &391763495
 GameObject:
   m_ObjectHideFlags: 0
@@ -1288,7 +1237,7 @@ Transform:
   m_GameObject: {fileID: 612971063}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.491, z: -50}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1391,7 +1340,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 666214984}
-  - component: {fileID: 666214985}
   m_Layer: 0
   m_Name: Menus
   m_TagString: Untagged
@@ -1417,19 +1365,6 @@ Transform:
   - {fileID: 1165285778}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &666214985
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 666214983}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 773149313aede9d4aa8a4605e923da19, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  settingsMenu: {fileID: 511602494}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -2154,7 +2089,7 @@ Transform:
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.491, z: -50}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2702,7 +2637,19 @@ MonoBehaviour:
   m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 176220536}
+        m_TargetAssemblyTypeName: GameController, Assembly-CSharp
+        m_MethodName: TextSliderChange
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1272152234
 GameObject:
   m_ObjectHideFlags: 0
@@ -3192,7 +3139,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -150}
+  m_AnchoredPosition: {x: 0, y: -25}
   m_SizeDelta: {x: 160, y: 45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1813476665
@@ -3239,9 +3186,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 666214985}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: QuitButtonPressed
+      - m_Target: {fileID: 176220536}
+        m_TargetAssemblyTypeName: GameController, Assembly-CSharp
+        m_MethodName: QuitGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3640,7 +3587,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -21.99998}
+  m_AnchoredPosition: {x: 0, y: -151}
   m_SizeDelta: {x: 160, y: 45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2103193872
@@ -3794,7 +3741,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Girls Erupt
+  m_text: Girl Of A Kind
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4015,7 +3962,6 @@ SceneRoots:
   m_Roots:
   - {fileID: 963194228}
   - {fileID: 705507995}
-  - {fileID: 322097712}
   - {fileID: 666214984}
   - {fileID: 176220537}
   - {fileID: 612971065}

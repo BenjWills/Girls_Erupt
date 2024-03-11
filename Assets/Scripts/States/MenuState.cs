@@ -8,8 +8,10 @@ public class MenuState : BaseStates
 {
     public override void EnterState(GameController gc)
     {
+        Debug.Log("MS Entered");
+        gc.iGMenu.SetActive(false);
         gc.mainMenu.SetActive(true);
-        gc.inputManagerScript.SetActive(false);
+        gc.inputManagerScript.enabled = false;
         gc.iGMenuSettings.enabled = false;
 
         foreach (CinemachineVirtualCamera camera in gc.cameras)

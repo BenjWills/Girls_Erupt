@@ -9,6 +9,7 @@ TagManager:
   - Pause Menu
   - Input Manager
   - In Game Menu Settings
+  - In Game Menu
   layers:
   - Default
   - TransparentFX
