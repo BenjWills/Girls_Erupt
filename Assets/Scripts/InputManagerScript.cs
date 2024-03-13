@@ -35,20 +35,6 @@ public class InputManagerScript : MonoBehaviour
         menu.performed += OnPause;
     }
 
-    void OnLook(InputValue value)
-    {
-        mouseLook = value.Get<Vector2>();
-
-        mouseX = mouseLook.x * mouseSensitivity * Time.deltaTime;
-        mouseY = mouseLook.y * mouseSensitivity * Time.deltaTime;
-
-        yRotation -= mouseY;
-        yRotation = Mathf.Clamp(yRotation, -80f, 80);
-        xRotation += mouseX;
-
-        transform.localRotation = Quaternion.Euler(0, xRotation, 0) * Quaternion.Euler(yRotation, 0, 0);
-    }
-
     void OnPause(InputAction.CallbackContext context)
     {
         iGMenuSettings.isPaused = !iGMenuSettings.isPaused;

@@ -10,6 +10,13 @@ TagManager:
   - Input Manager
   - In Game Menu Settings
   - In Game Menu
+  - Upgrade Menu
+  - Money Text
+  - Item 1 Text
+  - Shop Menu
+  - Inventory Menu
+  - Phone UI
+  - Time Text
   layers:
   - Default
   - TransparentFX

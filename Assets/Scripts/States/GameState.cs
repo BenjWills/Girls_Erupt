@@ -13,6 +13,7 @@ public class GameState : BaseStates
         gc.iGMenu.SetActive(true);
         gc.mainMenu.SetActive(false);
         gc.allCanvas.SetActive(false);
+        
 
         foreach (CinemachineVirtualCamera camera in gc.cameras)
         {
@@ -20,10 +21,12 @@ public class GameState : BaseStates
         }
         gc.gameCam.Priority = 11;
 
-        gc.StartEnteringGameState();
+        gc.inputManagerScript.enabled = true;
+        gc.iGMenuSettings.enabled = true;
+        gc.phoneUI.SetActive(true);
     }
     public override void UpdateState(GameController gc)
     {
-        
+
     }
 }

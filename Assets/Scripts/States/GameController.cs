@@ -24,6 +24,7 @@ public class GameController : MonoBehaviour
 
     public GameObject iGMenu;
     public Canvas pauseMenu;
+    public GameObject phoneUI;
 
     public InputManagerScript inputManagerScript;
     public InGameMenuSettings iGMenuSettings;
@@ -58,6 +59,7 @@ public class GameController : MonoBehaviour
         iGMenuSettings = GameObject.FindGameObjectWithTag("In Game Menu Settings").GetComponent<InGameMenuSettings>();
         iGMenu = GameObject.FindGameObjectWithTag("In Game Menu");
         player = GameObject.Find("Player");
+        phoneUI = GameObject.Find("Phone");
 
         Canvas[] menuObject = Resources.FindObjectsOfTypeAll<Canvas>();
         TMP_Dropdown[] dropdownObject = Resources.FindObjectsOfTypeAll<TMP_Dropdown>();
@@ -139,18 +141,5 @@ public class GameController : MonoBehaviour
             currentFont = fontSelection[currentFontNumb];
             text[i].font = currentFont;
         }
-    }
-
-    public void StartEnteringGameState()
-    {
-        StartCoroutine(EnteringGameState());
-    }
-
-    IEnumerator EnteringGameState()
-    {
-        player.transform.rotation = new Quaternion(0, 0, 0, 0);
-        yield return new WaitForSeconds(2);
-        inputManagerScript.enabled = true;
-        iGMenuSettings.enabled = true;
     }
 }
