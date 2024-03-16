@@ -10,29 +10,29 @@ public class InputManagerScript : MonoBehaviour
     public GameObject settingsMenu;
     public InGameMenuSettings iGMenuSettings;
 
-    private Vector2 moveInput;
-    public Rigidbody rb;
-    public Transform playerBody;
     [SerializeField] float movementSpeed = 10f;
+    PlayerInput playerInput;
+    InputAction moveAction;
+
     private Team1Game inputActions;
     private InputAction menu;
 
-    public float mouseSensitivity;
-    private Vector2 mouseLook;
-    private float xRotation;
-    private float yRotation;
-    float mouseX;
-    float mouseY;
 
     // Start is called before the first frame update
     void Start()
     {
         inputActions = new Team1Game();
-
         menu = inputActions.UI.PauseUnpause;
         menu.Enable();
-
         menu.performed += OnPause;
+
+        playerInput = GetComponent<PlayerInput>();
+        moveAction = playerInput.actions.FindAction("Move");
+    }
+
+    private void Update()
+    {
+        MovePlayer();
     }
 
     void OnPause(InputAction.CallbackContext context)
@@ -48,11 +48,9 @@ public class InputManagerScript : MonoBehaviour
         }
     }
 
-    void OnMove(InputValue value)
+    public void MovePlayer()
     {
-        moveInput = value.Get<Vector2>();
-
-        Vector3 playerVelocity = new Vector3(moveInput.x * movementSpeed, rb.velocity.y, moveInput.y * movementSpeed);
-        rb.velocity = transform.TransformDirection(playerVelocity);
+        Vector2 direction = moveAction.ReadValue<Vector2>();
+        transform.position += new Vector3(direction.x, 0, direction.y) * movementSpeed * Time.deltaTime;
     }
 }

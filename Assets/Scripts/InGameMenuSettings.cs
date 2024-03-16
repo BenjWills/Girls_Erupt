@@ -35,6 +35,10 @@ public class InGameMenuSettings : MonoBehaviour
     public int timeArrayCount;
     private bool timeCoroutineStarted;
 
+    public TextMeshProUGUI dayText;
+    public string[] days;
+    public int dayCount;
+
     private void Start()
     {
         GameObject[] menuObject = Resources.FindObjectsOfTypeAll<GameObject>();
@@ -58,20 +62,26 @@ public class InGameMenuSettings : MonoBehaviour
                 phoneUI = menuObject[i];
             }
         }
-
         timeCoroutineStarted = false;
     }
+
     private void Update()
     {
         moneyText.text = "Money: " + money.ToString();
         item1Text.text = "Item 1: " + item1.ToString();
         timeText.text = "Time: " + times[timeArrayCount];
+        dayText.text = "Day: " + days[dayCount];
 
         if (timeCoroutineStarted == false)
         {
             StartCoroutine(Timer());
         }
+        if (dayCount == 8)
+        {
+            dayCount = 0;
+        }
     }
+
     public void OpenSettingsMenu()
     {
         mainMenu.SetActive(false);
@@ -152,34 +162,41 @@ public class InGameMenuSettings : MonoBehaviour
             item1 += 1;
         }
     }
+
     public void OpenInventory()
     {
         inventoryCanvas.SetActive(true);
         upgradeCanavas.SetActive(false);
         shopCanvas.SetActive(false);
     }
+
     public void CloseInventory()
     {
         inventoryCanvas.SetActive(false);
     }
+
     public void OpenPhone()
     {
         phoneUI.SetActive(true);
     }
+
     public void ClosePhone()
     {
         phoneUI.SetActive(false);
     }
+
     IEnumerator Timer()
     {
         timeCoroutineStarted = true;
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(0.5f);
         timeArrayCount += 1;
         if (timeArrayCount == times.Length)
         {
             Debug.Log("New Day");
+            dayCount += 1;
             timeArrayCount = 0;
         }
+        Debug.Log("co ended");
         timeCoroutineStarted = false;
     }
 }
