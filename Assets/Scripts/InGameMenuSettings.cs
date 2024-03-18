@@ -76,10 +76,6 @@ public class InGameMenuSettings : MonoBehaviour
         {
             StartCoroutine(Timer());
         }
-        if (dayCount == 8)
-        {
-            dayCount = 0;
-        }
     }
 
     public void OpenSettingsMenu()
@@ -194,6 +190,10 @@ public class InGameMenuSettings : MonoBehaviour
         {
             Debug.Log("New Day");
             dayCount += 1;
+            if (dayCount == 8)
+            {
+                dayCount = 0;
+            }
             timeArrayCount = 0;
         }
         Debug.Log("co ended");
