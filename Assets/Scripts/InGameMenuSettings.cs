@@ -190,13 +190,12 @@ public class InGameMenuSettings : MonoBehaviour
         {
             Debug.Log("New Day");
             dayCount += 1;
-            if (dayCount == 8)
+            if (dayCount == days.Length)
             {
                 dayCount = 0;
             }
             timeArrayCount = 0;
         }
-        Debug.Log("co ended");
         timeCoroutineStarted = false;
     }
 }
