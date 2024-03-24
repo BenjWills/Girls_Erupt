@@ -38,6 +38,8 @@ public class InGameMenuSettings : MonoBehaviour
     public TextMeshProUGUI dayText;
     public string[] days;
     public int dayCount;
+    public bool isSunday;
+    public bool sundayCheck;
 
     private void Start()
     {
@@ -63,6 +65,7 @@ public class InGameMenuSettings : MonoBehaviour
             }
         }
         timeCoroutineStarted = false;
+        isSunday = true;
     }
 
     private void Update()
@@ -72,7 +75,13 @@ public class InGameMenuSettings : MonoBehaviour
         timeText.text = "Time: " + times[timeArrayCount];
         dayText.text = "Day: " + days[dayCount];
 
-        if (timeCoroutineStarted == false)
+        if (dayCount == 0 && sundayCheck == false)
+        {
+            isSunday = true;
+            sundayCheck = true;
+        }
+
+        if (timeCoroutineStarted == false && isSunday == false)
         {
             StartCoroutine(Timer());
         }
