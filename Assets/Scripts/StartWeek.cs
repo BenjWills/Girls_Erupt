@@ -14,6 +14,7 @@ public class StartWeek : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            Debug.Log("Triggr Entered");
             igMenuSettings.isSunday = false;
         }
     }
