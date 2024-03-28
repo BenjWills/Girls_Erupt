@@ -42,9 +42,14 @@ public class InGameMenuSettings : MonoBehaviour
     public bool isSunday;
     private bool sundayCheckDone;
 
+    private CustomerSpawner customerSpawner;
+    private GameController gc;
+
     private void Start()
     {
         GameObject[] menuObject = Resources.FindObjectsOfTypeAll<GameObject>();
+        customerSpawner = GameObject.Find("Customer Spawner").GetComponent<CustomerSpawner>();
+        gc = GameObject.Find("GameController").GetComponent<GameController>();
 
         for (int i = 0; i < menuObject.Length; i++)
         {
@@ -68,6 +73,7 @@ public class InGameMenuSettings : MonoBehaviour
         timeCoroutineStarted = false;
         isSunday = true;
         sundayCheckDone = false;
+
     }
 
     private void Update()
@@ -126,6 +132,7 @@ public class InGameMenuSettings : MonoBehaviour
     public void ToMainMenu()
     {
         SceneManager.LoadScene("MainMenu");
+        gc.isPlaying = false;
     }
 
     public void ToUpgradeMenu()
@@ -194,11 +201,13 @@ public class InGameMenuSettings : MonoBehaviour
 
     IEnumerator Timer()
     {
+        customerSpawner.StartSpawning();
         timeCoroutineStarted = true;
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1);
         timeArrayCount += 1;
         if (timeArrayCount == times.Length)
         {
+            customerSpawner.currentSpawned = 0;
             sundayCheckDone = false;
             Debug.Log("New Day");
             dayCount += 1;
