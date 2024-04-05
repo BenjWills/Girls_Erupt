@@ -6,12 +6,13 @@ public class CustomerSpawner : MonoBehaviour
 {
     public GameObject customerObject;
     public float[] customerSpawnNumb;
+    private float customerSpawnedNUmbPicked;
     private int numbPicked;
     public float currentSpawned;
     private bool minusHappened;
     public float customerSpawnTimer;
-    private float customerMaxSpawn = 42;
-    private bool canSpawn;
+    [SerializeField] private float customerMaxSpawn = 42;
+    public bool canSpawn;
 
     // Start is called before the first frame update
     void Start()
@@ -32,20 +33,21 @@ public class CustomerSpawner : MonoBehaviour
     IEnumerator CustomerSpawn()
     {
         numbPicked = Random.Range(0, 3);
-        while (customerSpawnNumb[numbPicked] != currentSpawned)
+        customerSpawnedNUmbPicked = customerSpawnNumb[numbPicked];
+        while (customerSpawnedNUmbPicked != currentSpawned)
         {
             if (minusHappened == false)
             {
-                customerMaxSpawn -= customerSpawnNumb[numbPicked];
+                customerMaxSpawn -= customerSpawnedNUmbPicked;
                 minusHappened = true;
             }
             Instantiate(customerObject, this.gameObject.transform);
             currentSpawned += 1;
             yield return new WaitForSeconds(customerSpawnTimer);
         }
-        if (customerSpawnNumb[numbPicked] == currentSpawned)
+        if (customerSpawnedNUmbPicked == currentSpawned)
         {
-            canSpawn = true;
+            canSpawn = false;
         }
     }
 }

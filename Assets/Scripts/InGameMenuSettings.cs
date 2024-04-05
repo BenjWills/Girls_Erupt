@@ -203,7 +203,7 @@ public class InGameMenuSettings : MonoBehaviour
     {
         customerSpawner.StartSpawning();
         timeCoroutineStarted = true;
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(2);
         timeArrayCount += 1;
         if (timeArrayCount == times.Length)
         {
@@ -212,6 +212,7 @@ public class InGameMenuSettings : MonoBehaviour
             Debug.Log("New Day");
             dayCount += 1;
             allDayCount += 1;
+            customerSpawner.canSpawn = true;
             if (dayCount == days.Length)
             {
                 dayCount = 0;
