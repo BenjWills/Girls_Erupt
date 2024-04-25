@@ -11,6 +11,8 @@ public class GameController : MonoBehaviour
     public TextMeshProUGUI[] text;
     public Slider textSlider;
     public List<float> defaultTextSize = new List<float>();
+    public List<float> ppTextSize = new List<float>();
+    public List<string> ppTextSizeString = new List<string>();
     public float textSliderValue;
 
     public TMP_Dropdown dropdown;
@@ -95,6 +97,22 @@ public class GameController : MonoBehaviour
         iGMenuSettings.enabled = false;
 
         TransitionToState(ms);
+
+        for (int i = 0; i < text.Length; i++)
+        {
+            text[i].font = fontSelection[PlayerPrefs.GetInt("Text Font")];
+        }
+
+        int tempPPTextSizeCount = PlayerPrefs.GetInt("Text Size Count");
+        for (int i = 0; i < tempPPTextSizeCount; i++)
+        {
+            ppTextSizeString.Add(PlayerPrefs.GetString("Text Size_" + i));
+        }
+
+        for (int i = 0; i < text.Length; i++)
+        {
+            text[i].fontSize = float.Parse(ppTextSizeString[i]);
+        }
     }
 
     void Update()
@@ -130,6 +148,14 @@ public class GameController : MonoBehaviour
         {
             textSliderValue = textSlider.value;
             text[i].fontSize = defaultTextSize[i] * textSliderValue;
+            ppTextSize.Add(text[i].fontSize);
+
+            ppTextSizeString[i] = ppTextSize[i].ToString();
+            for (int i2 = 0; i2 < ppTextSizeString.Count; i2++)
+            {
+                PlayerPrefs.SetString("Text Size_" + i2, ppTextSizeString[i2]);
+            }
+            PlayerPrefs.SetInt("Text Size Count", ppTextSize.Count);
         }
     }
 
@@ -137,8 +163,16 @@ public class GameController : MonoBehaviour
     {
         for (int i = 0; i < text.Length; i++)
         {
-            currentFontNumb = dropdown.value;
-            currentFont = fontSelection[currentFontNumb];
+            if (PlayerPrefs.GetInt("Text Font") == 1)
+            {
+                currentFontNumb = 1;
+            }
+            else
+            {
+                currentFontNumb = dropdown.value;
+                PlayerPrefs.SetInt("Text Font", currentFontNumb);
+            }
+            currentFont = fontSelection[PlayerPrefs.GetInt("Text Font")];
             text[i].font = currentFont;
         }
     }

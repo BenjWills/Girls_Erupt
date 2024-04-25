@@ -203,7 +203,7 @@ public class InGameMenuSettings : MonoBehaviour
     {
         customerSpawner.StartSpawning();
         timeCoroutineStarted = true;
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(60);
         timeArrayCount += 1;
         if (timeArrayCount == times.Length)
         {
