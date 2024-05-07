@@ -212,7 +212,6 @@ public class InGameMenuSettings : MonoBehaviour
             Debug.Log("New Day");
             dayCount += 1;
             allDayCount += 1;
-            customerSpawner.canSpawn = true;
             if (dayCount == days.Length)
             {
                 dayCount = 0;

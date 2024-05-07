@@ -1171,7 +1171,7 @@ MonoBehaviour:
   - 9
   - 10
   currentSpawned: 0
-  customerSpawnTimer: 0.5
+  customerSpawnTimer: 30
 --- !u!4 &237848867
 Transform:
   m_ObjectHideFlags: 0
@@ -4848,7 +4848,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1200396595}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.24730675, y: -0.0000000049908757, z: 0.0000000012738459, w: 0.9689373}
+  m_LocalRotation: {x: 0.24730676, y: 0.000000018389102, z: -0.0000000046935433, w: 0.9689373}
   m_LocalPosition: {x: 0, y: 4.94, z: -10.87}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -6408,7 +6408,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1646611611}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.24730675, y: -0.0000000049908757, z: 0.0000000012738459, w: 0.9689373}
+  m_LocalRotation: {x: 0.24730676, y: 0.000000018389102, z: -0.0000000046935433, w: 0.9689373}
   m_LocalPosition: {x: 0, y: 4.94, z: -10.87}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

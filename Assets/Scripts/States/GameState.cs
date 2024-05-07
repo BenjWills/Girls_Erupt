@@ -23,7 +23,7 @@ public class GameState : BaseStates
 
         gc.inputManagerScript.enabled = true;
         gc.iGMenuSettings.enabled = true;
-        gc.phoneUI.SetActive(true);
+        gc.phoneUI.enabled = true;
     }
     public override void UpdateState(GameController gc)
     {

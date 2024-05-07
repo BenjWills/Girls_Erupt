@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.UI;
 using Cinemachine;
+using UnityEngine.Audio;
 
 public class GameController : MonoBehaviour
 {
@@ -26,7 +27,7 @@ public class GameController : MonoBehaviour
 
     public GameObject iGMenu;
     public Canvas pauseMenu;
-    public GameObject phoneUI;
+    public Canvas phoneUI;
 
     public InputManagerScript inputManagerScript;
     public InGameMenuSettings iGMenuSettings;
@@ -41,6 +42,17 @@ public class GameController : MonoBehaviour
     public Transform gameCamLookAt;
 
     public GameObject player;
+
+    private float fieldOfVisionValue;
+    public Slider sliderFOV;
+    public TextMeshProUGUI sliderNumbText;
+
+    public Slider musicSlider;
+    public AudioMixer mainMixer;
+    public Slider soundSlider;
+
+    const string MIXER_MUSIC = "Music Volume";
+    const string MIXER_SOUND = "Sound Volume";
 
     public BaseStates currentState;
     public readonly MenuState ms = new MenuState();
@@ -61,16 +73,20 @@ public class GameController : MonoBehaviour
         iGMenuSettings = GameObject.FindGameObjectWithTag("In Game Menu Settings").GetComponent<InGameMenuSettings>();
         iGMenu = GameObject.FindGameObjectWithTag("In Game Menu");
         player = GameObject.Find("Player");
-        phoneUI = GameObject.Find("Phone");
 
         Canvas[] menuObject = Resources.FindObjectsOfTypeAll<Canvas>();
         TMP_Dropdown[] dropdownObject = Resources.FindObjectsOfTypeAll<TMP_Dropdown>();
+        Slider[] slider = Resources.FindObjectsOfTypeAll<Slider>();
 
         for (int i = 0; i < menuObject.Length; i++)
         {
             if (menuObject[i].tag == "Pause Menu")
             {
                 pauseMenu = menuObject[i];
+            } 
+            if (menuObject[i].tag == "Phone")
+            {
+                phoneUI = menuObject[i];
             }
         }
         for (int i = 0; i < dropdownObject.Length; i++)
@@ -78,6 +94,25 @@ public class GameController : MonoBehaviour
             if (dropdownObject[i].name == "Settings Font Dropdown")
             {
                 dropdown = dropdownObject[i];
+            }
+        }
+        for (int i = 0; i < slider.Length; i++)
+        {
+            if (slider[i].name == "Settings Text Size Slider")
+            {
+                textSlider = slider[i];
+            }
+            if (slider[i].name == "Music Slider")
+            {
+                musicSlider = slider[i];
+            }
+            if (slider[i].name == "Sound Slider")
+            {
+                soundSlider = slider[i];
+            }
+            if (slider[i].name == "FOV Slider")
+            {
+                sliderFOV = slider[i];
             }
         }
 
@@ -98,21 +133,11 @@ public class GameController : MonoBehaviour
 
         TransitionToState(ms);
 
-        for (int i = 0; i < text.Length; i++)
-        {
-            text[i].font = fontSelection[PlayerPrefs.GetInt("Text Font")];
-        }
+        musicSlider.onValueChanged.AddListener(SetMusicVolume);
+        soundSlider.onValueChanged.AddListener(SetSoundVolume);
 
-        int tempPPTextSizeCount = PlayerPrefs.GetInt("Text Size Count");
-        for (int i = 0; i < tempPPTextSizeCount; i++)
-        {
-            ppTextSizeString.Add(PlayerPrefs.GetString("Text Size_" + i));
-        }
-
-        for (int i = 0; i < text.Length; i++)
-        {
-            text[i].fontSize = float.Parse(ppTextSizeString[i]);
-        }
+        fieldOfVisionValue = sliderFOV.value;
+        sliderNumbText.text = "FOV: " + fieldOfVisionValue.ToString();
     }
 
     void Update()
@@ -129,6 +154,26 @@ public class GameController : MonoBehaviour
     public void SettingsOpenClose()
     {
         inSettings = !inSettings;
+    }
+
+    void SetMusicVolume(float value)
+    {
+        mainMixer.SetFloat(MIXER_MUSIC, Mathf.Log10(value) * 20);
+    }
+
+    void SetSoundVolume(float value)
+    {
+        mainMixer.SetFloat(MIXER_SOUND, Mathf.Log10(value) * 20);
+    }
+
+    public void SetFOV()
+    {
+        fieldOfVisionValue = sliderFOV.value;
+        for (int i = 0; i < cameras.Count; i++)
+        {
+            cameras[i].m_Lens.FieldOfView = fieldOfVisionValue;
+        }
+        sliderNumbText.text = "FOV: " + fieldOfVisionValue.ToString();
     }
 
     public void PlayGame()
@@ -149,13 +194,6 @@ public class GameController : MonoBehaviour
             textSliderValue = textSlider.value;
             text[i].fontSize = defaultTextSize[i] * textSliderValue;
             ppTextSize.Add(text[i].fontSize);
-
-            ppTextSizeString[i] = ppTextSize[i].ToString();
-            for (int i2 = 0; i2 < ppTextSizeString.Count; i2++)
-            {
-                PlayerPrefs.SetString("Text Size_" + i2, ppTextSizeString[i2]);
-            }
-            PlayerPrefs.SetInt("Text Size Count", ppTextSize.Count);
         }
     }
 
@@ -163,16 +201,8 @@ public class GameController : MonoBehaviour
     {
         for (int i = 0; i < text.Length; i++)
         {
-            if (PlayerPrefs.GetInt("Text Font") == 1)
-            {
-                currentFontNumb = 1;
-            }
-            else
-            {
-                currentFontNumb = dropdown.value;
-                PlayerPrefs.SetInt("Text Font", currentFontNumb);
-            }
-            currentFont = fontSelection[PlayerPrefs.GetInt("Text Font")];
+            currentFontNumb = dropdown.value;
+            currentFont = fontSelection[currentFontNumb];
             text[i].font = currentFont;
         }
     }
